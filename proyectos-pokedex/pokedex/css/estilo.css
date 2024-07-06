@@ -46,23 +46,41 @@ header{
     justify-content: center;
 }
 .img-log{
-    width: 50%;
+    width: 70%;
     height: auto;
     object-fit: contain;
 }
+/*
 .titulo{
-    position: absolute;
-    left: 45%;
-    top: 20%;
-    background-color:white;
-    color:rgb(30, 28, 28);
-    font-family: "Flexo-Regular",arial,sans-serif;
+    justify-content: center;
+    text-align: center;
+    color: #b85320;
     font-weight: 400;
+    font-family: fantasy;
+    font-size: 80px;
     font-style: normal;
     padding: 10px;
     border-radius: 5px;
 }
-
+ Centrar el texto en la parte superior derecha 
+.poke-derecha {
+    position: absolute;
+    top: 20%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    font-family: fantasy;
+  }
+  */
+  /* Centrar el texto en la parte superior izquierda 
+  .poke-izquierda {
+    position: absolute;
+    top: 20%;
+    left: 14%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+  }*/
+  
 /*-------------------------------------buscador-----------------------------*/
 .buscador{
     display: flex;
@@ -171,7 +189,7 @@ margin: 0 100px;
     font-size: 20px;
 }
 
-/* activar un pokemos para que se vea o no*/
+/* activar un pokemon para que se vea o no*/
 .pokemom-box:not(.activo){
     display: none;
 }
@@ -320,6 +338,7 @@ margin: 0 100px;
     gap: 1rem;
 }
 .pokemom-box{
+    flex: 1;
     border-radius: 1rem;
     background-color: var(--clr-white);
     box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, .25);
@@ -392,3 +411,31 @@ margin: 0 100px;
 }
 
 
+/*-------------------bnt ver mas--------------------- */
+.bot-verMas{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.btn-mas{
+    position: absolute;
+    top:  390%;
+    left: 70%;
+    background-color: #6890f0;
+    color: whitesmoke;
+    border: 2px solid #0077CC; /* Borde azul */
+    padding: 10px 20px; /* Acolchado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    cursor: pointer; /* Indicador de cursor en mano */
+    text-decoration: none; /* Quitar subrayado del texto */
+    display: inline-block; /* Permitir que el botón se ajuste al contenido */
+    margin: 10px 0; /* Margen superior e inferior */
+    transition: background-color 0.3s ease; /* Animación de cambio de color de fondo al pasar el cursor */
+  }
+  
+  .btn-mas:hover {
+    background-color: #D6EFFF; /* Color de fondo azul más claro al pasar el cursor */
+  }
+  
