@@ -144,6 +144,52 @@ function filterPoke(value) {
   });
 }
 
+
+/*--------------------------------------------------------boton ver mas----------------------------------------------------*/
+const btnVerMas = document.querySelector(".btn-mas");
+
+const pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon";
+let offset = 20;
+let limit = 20;
+let shownPokemonIds = []; // Use a more descriptive name
+
+async function fetchDataFromAPI(apiUrl, requestParams = {}, offset = 0, limit = 20, responseFormat = "json") {
+  const response = await fetch(`${apiUrl}?offset=${offset}&limit=${limit}`);
+  const data = await response.json();
+  return data.results; // Return only the results array
+}
+
+async function showMorePokemon() {
+  const newPokemons = await fetchDataFromAPI(pokemonApiUrl, {}, offset, limit);
+
+  // Filter out already shown Pokemon
+  const filteredPokemons = newPokemons.filter((pokemon) => !shownPokemonIds.includes(pokemon.id));
+  shownPokemonIds = [...shownPokemonIds, ...filteredPokemons.map((pokemon) => pokemon.id)]; // Update shownPokemonIds
+
+  const pokemonBoxes = document.querySelectorAll('.pokemom-box');
+
+  // Update existing Pokemon boxes directly using spread syntax
+  pokemonBoxes.forEach((box) => {
+    const pokemon = filteredPokemons.find((p) => p.id === Number(box.dataset.pokeId)); // Convert dataset.pokeId to number for comparison
+
+    if (pokemon) {
+      box.querySelector(".img-poke").src = pokemon.sprites.other["official-artwork"].front_default;
+      box.querySelector(".idPokemon").textContent = pokemon.id;
+      box.querySelector(".name-poke").textContent = pokemon.name;
+      box.querySelector(".experiencia").textContent = pokemon.base_experience;
+
+      // Update types (assuming there's a `pokeTypes` element within the box)
+      const types = pokemon.types;
+      box.querySelector(".poke-tipos").innerHTML = types.map((type) => `<div class="${type.type.name} tipo">${type.type.name}</div>`).join("");
+    }
+  });
+
+  offset += limit;
+}
+
+btnVerMas.addEventListener("click", showMorePokemon);
+
+
 // Inicializar el código luego de que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndDisplayPokemons();
