@@ -148,6 +148,7 @@ function filterPoke(value) {
 /*--------------------------------------------------------boton ver mas----------------------------------------------------*/
 const btnVerMas = document.querySelector(".btn-mas");
 
+btnVerMas.addEventListener("click", showMorePokemon);
 
 
 const pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon";
@@ -166,7 +167,6 @@ async function fetchDataFromAPI(apiUrl, requestParams = {}, offset = 0, limit = 
 async function showMorePokemon() {
   try {
     const newPokemons = await fetchDataFromAPI(pokemonApiUrl, {}, offset, limit);
-  
 
     // Filter out already shown Pokemon
     const filteredPokemons = newPokemons.filter((pokemon) => !shownPokemonIds.includes(pokemon.id));
@@ -177,8 +177,14 @@ async function showMorePokemon() {
     // Update existing Pokemon boxes directly using spread syntax with await
     pokemonBoxes.forEach(async (box) => {
       const pokemon = await filteredPokemons.find((p) => p.id === Number(box.dataset.pokeId)); // Convert dataset.pokeId to number for comparison
-
-      if (pokemon) {
+   // Limpiando la lista de pokemones existente
+      
+      if (pokemon)
+        
+        {while(pokemonBoxes.firstChild){
+        pokemonBoxes.removeChild(pokemonBoxes.firstChild);
+        }
+        //datos actualizados 
         box.querySelector(".img-poke").src = pokemon.sprites.other["official-artwork"].front_default;
         box.querySelector(".idPokemon").textContent = pokemon.id;
         box.querySelector(".name-poke").textContent = pokemon.name;
@@ -196,7 +202,6 @@ async function showMorePokemon() {
   }
 }
 
-btnVerMas.addEventListener("click", showMorePokemon);
 
 
 
