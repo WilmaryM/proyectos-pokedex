@@ -145,66 +145,56 @@ function filterPoke(value) {
 }
 
 
+
+
 /*--------------------------------------------------------boton ver mas----------------------------------------------------*/
 const btnVerMas = document.querySelector(".btn-mas");
 
-btnVerMas.addEventListener("click", showMorePokemon);
-
-
 const pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon";
-
-
-let offset = 20;
+let currentPage = 1;
+let offset= 20;
 let limit = 20;
 let shownPokemonIds = [];
 
 async function fetchDataFromAPI(apiUrl, requestParams = {}, offset = 0, limit = 20, responseFormat = "json") {
-  const response = await fetch(`${apiUrl}?offset=${offset}&limit=${limit}`);
+  const adjustedOffset = (currentPage - 1) * limit; // Calculate offset based on current page and limit
+  const response = await fetch(`${pokemonApiUrl}?offset=${adjustedOffset}&limit=${limit}`);
   const data = await response.json();
   return data.results; // Return only the results array
 }
 
 async function showMorePokemon() {
-  try {
-    const newPokemons = await fetchDataFromAPI(pokemonApiUrl, {}, offset, limit);
+  const newPokemons = await fetchDataFromAPI(pokemonApiUrl, {}, offset, limit);
 
-    // Filter out already shown Pokemon
-    const filteredPokemons = newPokemons.filter((pokemon) => !shownPokemonIds.includes(pokemon.id));
-    shownPokemonIds = [...shownPokemonIds, ...filteredPokemons.map((pokemon) => pokemon.id)]; // Update shownPokemonIds
-    
+  // Filter out already shown Pokemon (handle empty filteredPokemons on initial click)
+  const filteredPokemons = newPokemons.length > 0 ? newPokemons.filter((pokemon) => !shownPokemonIds.includes(pokemon.id)) : [];
+  shownPokemonIds = [...shownPokemonIds, ...filteredPokemons.map((pokemon) => pokemon.id)]; // Update shownPokemonIds
 
-    const pokemonBoxes = document.querySelectorAll('.pokemom-box');
-    // Update existing Pokemon boxes directly using spread syntax with await
-    pokemonBoxes.forEach(async (box) => {
-      const pokemon = await filteredPokemons.find((p) => p.id === Number(box.dataset.pokeId)); // Convert dataset.pokeId to number for comparison
-   // Limpiando la lista de pokemones existente
-      
-      if (pokemon)
-        
-        {while(pokemonBoxes.firstChild){
-        pokemonBoxes.removeChild(pokemonBoxes.firstChild);
-        }
-        //datos actualizados 
-        box.querySelector(".img-poke").src = pokemon.sprites.other["official-artwork"].front_default;
-        box.querySelector(".idPokemon").textContent = pokemon.id;
-        box.querySelector(".name-poke").textContent = pokemon.name;
-        box.querySelector(".experiencia").textContent = pokemon.base_experience;
+  const pokemonBoxes = document.querySelectorAll('.pokemom-box');
 
-        // Update types (assuming there's a `pokeTypes` element within the box)
-        const types = pokemon.types;
-        box.querySelector(".poke-tipos").innerHTML = types.map((type) => `<div class="${type.type.name} tipo">${type.type.name}</div>`).join("");
-      }
-    });
+  // Update existing Pokemon boxes directly using spread syntax
+  pokemonBoxes.forEach((box) => {
+    const pokemon = filteredPokemons.find((p) => p.id === Number(box.dataset.pokeId)); // Convert dataset.pokeId to number for comparison
 
-    offset += limit;
-  } catch (error) {
-    console.error("Error fetching more Pokemon:", error);
-  }
+    if (pokemon) {
+      box.querySelector(".img-poke").src = pokemon.sprites.other["official-artwork"].front_default;
+      box.querySelector(".idPokemon").textContent = pokemon.id;
+      box.querySelector(".name-poke").textContent = pokemon.name;
+      box.querySelector(".experiencia").textContent = pokemon.base_experience;
+
+      // Update types (assuming there's a `pokeTipos` element within the box)
+      const types = pokemon.types;
+      box.querySelector(".poke-tipos").innerHTML = types.map((type) => `<div class="${type.type.name} tipo">${type.type.name}</div>`).join("");
+    }
+  });
+
+  offset += limit; // Update offset after successful data fetch
 }
 
-
-
-
+btnVerMas.addEventListener("click", async () => { // Make the function call asynchronous
+  currentPage++;
+  await showMorePokemon(); // Wait for showMorePokemon to finish before proceeding
+});
 
 // Inicializar el código luego de que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {

@@ -178,10 +178,7 @@ margin: 0 100px;
     cursor: pointer;
     transition: all 0.4s linear;
 }
-.butom-random>:hover{
-    transition: .4s ;
-    transform: scale(0.1);
-}
+
 .categoria{
     width: 200px;
 }
@@ -234,12 +231,7 @@ margin: 0 100px;
     border: none;
 }
 
-.filtro_tipo:hover{
-    /*padding-left: 1.5rem;
-    background-color: hsl(205, 86%, 81%);*/
-    transition: .2s ;
-    transform: scale(0.1);
-}
+
 
 
 .normal {
