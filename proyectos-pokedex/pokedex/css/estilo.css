@@ -420,6 +420,7 @@ margin: 0 100px;
     padding: 10px 20px; /* Acolchado interno */
     border-radius: 10px; /* Esquinas redondeadas */
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
     cursor: pointer; /* Indicador de cursor en mano */
     text-decoration: none; /* Quitar subrayado del texto */
     display: inline-block; /* Permitir que el botón se ajuste al contenido */

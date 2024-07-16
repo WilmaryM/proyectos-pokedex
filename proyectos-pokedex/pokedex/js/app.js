@@ -148,7 +148,10 @@ function filterPoke(value) {
 
 
 /*--------------------------------------------------------boton ver mas----------------------------------------------------*/
-const btnVerMas = document.querySelector(".btn-mas");
+document.addEventListener('DOMContentLoaded', function() {
+  const btnVerMas = document.querySelector(".btn-mas");
+
+
 
 const pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon";
 let currentPage = 1;
@@ -161,7 +164,7 @@ async function fetchDataFromAPI(apiUrl, requestParams = {}, offset = 0, limit = 
   const response = await fetch(`${pokemonApiUrl}?offset=${adjustedOffset}&limit=${limit}`);
   const data = await response.json();
   return data.results; // Return only the results array
-}
+};
 
 async function showMorePokemon() {
   const newPokemons = await fetchDataFromAPI(pokemonApiUrl, {}, offset, limit);
@@ -185,17 +188,17 @@ async function showMorePokemon() {
       // Update types (assuming there's a `pokeTipos` element within the box)
       const types = pokemon.types;
       box.querySelector(".poke-tipos").innerHTML = types.map((type) => `<div class="${type.type.name} tipo">${type.type.name}</div>`).join("");
-    }
+    };
   });
 
   offset += limit; // Update offset after successful data fetch
-}
-
-btnVerMas.addEventListener("click", async () => { // Make the function call asynchronous
+};
+btnVerMas.addEventListener("click", async () => {
   currentPage++;
-  await showMorePokemon(); // Wait for showMorePokemon to finish before proceeding
+  await showMorePokemon();
 });
 
+});
 // Inicializar el código luego de que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndDisplayPokemons();
