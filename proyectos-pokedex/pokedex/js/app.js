@@ -144,9 +144,38 @@ function filterPoke(value) {
   });
 }
 
+/*----------------------------------------------------sort by-------------------------------------------------*/
 
+const pokemons = [
+  { id: 1, name: "Bulbasaur", exp: 64, types: ["Grass", "Ground"] },
+  // Add more Pokemon objects here
+];
 
+const pokeList = document.querySelector('.pokemon-list');
 
+const sortSelector = document.getElementById('buscadorA-Z');
+sortSelector.addEventListener('change', ()=>{
+  const sortValue = sortSelector.value;
+  let sortedPokemons = [...pokemons];
+
+  switch (sortValue) {
+    case 'id-asc':
+      sortedPokemons.sort((a, b) => a.id - b.id);
+      break;
+    case 'id-desc':
+      sortedPokemons.sort((a, b) => b.id - a.id);
+      break;
+    case 'name-asc':
+      sortedPokemons.sort((a, b) => a.name.localeCompare(b.name)); // Case-insensitive sorting
+      break;
+    case 'name-desc':
+      sortedPokemons.sort((a, b) => b.name.localeCompare(a.name)); // Case-insensitive sorting
+      break;
+    default:
+      break;
+  }
+
+})
 /*--------------------------------------------------------boton ver mas----------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', function() {
   const btnVerMas = document.querySelector(".btn-mas");
@@ -203,4 +232,5 @@ btnVerMas.addEventListener("click", async () => {
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndDisplayPokemons();
   filterPoke("all");
+
 });
