@@ -152,30 +152,46 @@ const pokemons = [
 ];
 
 const pokeList = document.querySelector('.pokemon-list');
-
 const sortSelector = document.getElementById('buscadorA-Z');
-sortSelector.addEventListener('change', ()=>{
-  const sortValue = sortSelector.value;
-  let sortedPokemons = [...pokemons];
 
-  switch (sortValue) {
-    case 'id-asc':
-      sortedPokemons.sort((a, b) => a.id - b.id);
-      break;
-    case 'id-desc':
-      sortedPokemons.sort((a, b) => b.id - a.id);
-      break;
-    case 'name-asc':
-      sortedPokemons.sort((a, b) => a.name.localeCompare(b.name)); // Case-insensitive sorting
-      break;
-    case 'name-desc':
-      sortedPokemons.sort((a, b) => b.name.localeCompare(a.name)); // Case-insensitive sorting
-      break;
-    default:
-      break;
+sortSelector.addEventListener('click', ()=>{
+  const sortedPokemons = [...pokemons].sort((a, b)=>{
+      const sortedData = [...pokemons].sort((a, b) => a.id - b.id);
+
+  });
+
+  function updatePokemonList(sortedData) {
+    // Clear the existing list content
+    pokemonList.innerHTML = '';
+  
+    // Create and append DOM elements for each Pokemon
+    sortedData.forEach(pokemon => {
+      // Create the DOM element for the Pokemon
+      const pokemonBox = createPokemonBox(pokemon);
+  
+      // Append the element to the list
+      pokemonList.appendChild(pokemonBox);
+    });
   }
-
+  
+  updatePokemonList(sortedData);
 })
+
+function createPokemonBox(pokemon) {
+  // Create the DOM structure for the Pokemon box
+  const pokemonBox = document.createElement('div');
+  pokemonBox.classList.add('pokemon-box'); // Add a class for styling
+
+  // Populate the box with content using Pokemon data
+  pokemonBox.innerHTML = `
+    <img src="${pokemon.imageUrl}" alt="Pokemon image">
+    <h2>${pokemon.name}</h2>
+    <p>${pokemon.type}</p>
+  `;
+
+  return pokemonBox;
+}
+
 /*--------------------------------------------------------boton ver mas----------------------------------------------------*/
 document.addEventListener('DOMContentLoaded', function() {
   const btnVerMas = document.querySelector(".btn-mas");
@@ -198,17 +214,25 @@ async function fetchDataFromAPI(apiUrl, requestParams = {}, offset = 0, limit = 
 async function showMorePokemon() {
   const newPokemons = await fetchDataFromAPI(pokemonApiUrl, {}, offset, limit);
 
-  // Filter out already shown Pokemon (handle empty filteredPokemons on initial click)
-  const filteredPokemons = newPokemons.length > 0 ? newPokemons.filter((pokemon) => !shownPokemonIds.includes(pokemon.id)) : [];
-  shownPokemonIds = [...shownPokemonIds, ...filteredPokemons.map((pokemon) => pokemon.id)]; // Update shownPokemonIds
+  // Handle both initial and subsequent data fetches
+  const filteredPokemons = newPokemons.map((pokemon) => pokemon); // Initially, use all new Pokemon
+
+  // Update shownPokemonIds
+  shownPokemonIds = [...shownPokemonIds, ...filteredPokemons.map((pokemon) => pokemon.id)];
 
   const pokemonBoxes = document.querySelectorAll('.pokemom-box');
+  let updatesMade = 0; // Track number of updates
 
-  // Update existing Pokemon boxes directly using spread syntax
   pokemonBoxes.forEach((box) => {
-    const pokemon = filteredPokemons.find((p) => p.id === Number(box.dataset.pokeId)); // Convert dataset.pokeId to number for comparison
+    if (updatesMade >= filteredPokemons.length) {
+      // Stop iterating if enough updates have been made
+      return;
+    }
+    
+    const pokemon = filteredPokemons.find((p) => p.id === Number(box.dataset.pokeId));
 
     if (pokemon) {
+      // Update box content
       box.querySelector(".img-poke").src = pokemon.sprites.other["official-artwork"].front_default;
       box.querySelector(".idPokemon").textContent = pokemon.id;
       box.querySelector(".name-poke").textContent = pokemon.name;
@@ -217,15 +241,21 @@ async function showMorePokemon() {
       // Update types (assuming there's a `pokeTipos` element within the box)
       const types = pokemon.types;
       box.querySelector(".poke-tipos").innerHTML = types.map((type) => `<div class="${type.type.name} tipo">${type.type.name}</div>`).join("");
-    };
+
+      updatesMade++;
+    }
   });
 
   offset += limit; // Update offset after successful data fetch
-};
+}
+
 btnVerMas.addEventListener("click", async () => {
   currentPage++;
   await showMorePokemon();
 });
+
+const lista = document.querySelector('.pokemon-list');
+
 
 });
 // Inicializar el código luego de que el DOM esté completamente cargado
