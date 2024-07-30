@@ -196,6 +196,10 @@ margin: 0 100px;
 .hide {
     display: none;
 }
+
+.info-contenedor{
+    display: none;
+}
 /*----------------------------------------- caja de filtro------------------------------------------------- */
 .texto{
     font-size: 20px;
@@ -426,9 +430,106 @@ margin: 0 100px;
     display: inline-block; /* Permitir que el botón se ajuste al contenido */
     margin: 10px 0; /* Margen superior e inferior */
     transition: background-color 0.3s ease; /* Animación de cambio de color de fondo al pasar el cursor */
-  }
-  
-  .btn-mas:hover {
+}
+
+.btn-mas:hover {
     background-color: #D6EFFF; /* Color de fondo azul más claro al pasar el cursor */
-  }
-  
+}
+
+
+/* ----------------------------------contenedor de infromacion*/
+
+.info-contenedor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 350px;
+    max-width: 80%;
+    border-radius: 10px;
+    background-color:rgba(226, 226, 234, 0.941);
+}
+
+.img> img{
+    width: 200px;
+    margin-bottom: 20px;
+    margin: 10px;
+    
+}
+
+.info-detalles{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.datos-poke{
+    position: relative;
+    left: 250px;
+    bottom: 150px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.cuadro-datos{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 250px;
+    bottom: 120px;
+}
+
+.debilidad-poke{
+    display: flex;
+    flex-wrap: wrap;
+    display: flex;
+    position: relative;
+    bottom: 100px;
+    flex-direction: row;
+}
+.titulo-info{
+    position: relative;
+    bottom: 30px;
+    left: 10px;
+}
+.debilidad{
+    width: 50px;
+    position: relative;
+    right: 80px;
+    padding: 10px;
+    margin: 5px;
+    text-align: center;
+}
+
+.btn-cerrar{
+    position: relative;
+    bottom: 150px;
+    left: 400px;
+    background-color: #6890f0;
+    color: whitesmoke;
+    border: 2px solid #0077CC; /* Borde azul */
+    padding: 5px 10px; /* Acolchado interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+    cursor: pointer; /* Indicador de cursor en mano */
+    text-decoration: none; /* Quitar subrayado del texto */
+    display: inline-block; /* Permitir que el botón se ajuste al contenido */
+    margin: 10px 0; /* Margen superior e inferior */
+    transition: background-color 0.3s ease; /* Animación de cambio de color de fondo al pasar el cursor */
+}
+.btn-cerrar:hover{
+    background-color: #D6EFFF; /* Color de fondo azul más claro al pasar el cursor */
+
+}
+
+@media (max-width: 768px) {
+    .info-contenedor {
+    width: 90%;
+    }
+}

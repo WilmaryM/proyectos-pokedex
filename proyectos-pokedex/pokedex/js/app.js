@@ -258,6 +258,41 @@ const lista = document.querySelector('.pokemon-list');
 
 
 });
+
+/** ---------------------------------------mostrar informacion-------------------------------- */
+function mostrar(clickedBox) {
+  if (!clickedBox) {
+    console.error("clickedBox is undefined");
+    return;
+  }
+
+  const contenedor = document.querySelector('.info-contenedor');
+  contenedor.style.display = 'block';
+
+  const boxRect = clickedBox.getBoundingClientRect();
+  const windowY = window.scrollY || window.pageYOffset;
+
+  contenedor.style.top = boxRect.top + windowY + 'px';
+  contenedor.style.left = boxRect.left + 'px';
+  contenedor.style.rigth = boxRect.rigth + 'px';
+}
+
+function ocultar() {
+  const contenedor = document.querySelector('.info-contenedor');
+  contenedor.style.display = 'none';
+}
+
+document.addEventListener('click', (event) => {
+  const clickedBox = event.target.closest('.pokemom-box');
+  if (clickedBox) {
+    mostrar(clickedBox);
+  }
+});
+
+
+
+
+
 // Inicializar el código luego de que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
   fetchAndDisplayPokemons();
