@@ -1,7 +1,7 @@
 // Inicializa la información del Pokémon
 export function initializePokemonInfo() {
   const infoContainer = document.getElementById("infoContainer");
-  infoContainer.style.display = "none";
+  infoContainer.close();
 
   // Agrega un evento a la lista de Pokémon para mostrar la información
   document.getElementById("pokemonList").addEventListener("click", (event) => {
@@ -23,14 +23,13 @@ function showInfo(clickedBox) {
   }
 
   const infoContainer = document.getElementById("infoContainer");
-  infoContainer.style.display = "flex";
-
   updateInfoContent(clickedBox);
+  infoContainer.showModal();
 }
 
 // Oculta la información del Pokémon
 function hideInfo() {
-  document.getElementById("infoContainer").style.display = "none";
+  document.getElementById("infoContainer").close();
 }
 
 // Actualiza el contenido de la información del Pokémon
@@ -42,7 +41,17 @@ function updateInfoContent(clickedBox) {
     clickedBox.querySelectorAll("[data-pokemon-type]")
   ).map((type) => type.textContent);
 
-  document.querySelector("#infoContainer [data-info-image]").src = img;
+  // Update images
+  const sprites = clickedBox.dataset.sprites
+    ? JSON.parse(clickedBox.dataset.sprites)
+    : {};
+  document.querySelector("#infoContainer .img").innerHTML = `
+    <img src="${sprites.front_default}" alt="Front Default">
+    <img src="${sprites.back_default}" alt="Back Default">
+    <img src="${sprites.front_shiny}" alt="Front Shiny">
+    <img src="${sprites.back_shiny}" alt="Back Shiny">
+  `;
+
   document.querySelector(
     "#infoContainer [data-info-name]"
   ).textContent = `${name} (${id})`;

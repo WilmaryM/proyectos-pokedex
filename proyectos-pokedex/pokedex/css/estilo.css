@@ -158,7 +158,6 @@ main {
 }
 
 .infoContainer {
-  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -409,8 +408,7 @@ main {
 
 /* ----------------------------------contenedor de infromacion*/
 
-.infoContainer {
-  display: flex;
+dialog.infoContainer {
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -419,74 +417,68 @@ main {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
-  height: 350px;
+  height: auto;
   max-width: 80%;
   border-radius: 10px;
-  background-color: rgba(226, 226, 234, 0.941);
+  background-color: var(--clr-white);
+  box-shadow: 0 0 3rem -1rem rgba(0, 0, 0, 0.25);
   z-index: 1001;
+  padding: 2rem;
 }
 
-.img > img {
-  width: 200px;
-  margin-bottom: 20px;
-  margin: 10px;
+dialog.infoContainer::backdrop {
+  background: rgba(0, 0, 0, 0.5);
 }
 
-.infoDetails {
+dialog.infoContainer .img {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+dialog.infoContainer .img img {
+  width: 100px;
+  height: 100px;
+}
+
+dialog.infoContainer .infoDetails {
   display: flex;
   flex-direction: column;
-  width: 200px;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
 }
 
-.dataBox {
+dialog.infoContainer .dataBox {
   display: flex;
   flex-direction: column;
-  position: relative;
-  left: 250px;
-  bottom: 120px;
+  gap: 0.5rem;
 }
 
-.weaknessPoke {
+dialog.infoContainer .weaknessPoke {
   display: flex;
   flex-wrap: wrap;
-  display: flex;
-  position: relative;
-  bottom: 100px;
-  flex-direction: row;
-}
-.infoTitle {
-  position: relative;
-  bottom: 30px;
-  left: 10px;
-}
-.weakness {
-  width: 50px;
-  position: relative;
-  right: 80px;
-  padding: 10px;
-  margin: 5px;
-  text-align: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.closeButton {
-  position: relative;
-  bottom: 150px;
-  left: 400px;
+dialog.infoContainer .closeButton {
   background-color: #6890f0;
   color: whitesmoke;
-  border: 2px solid #0077cc; /* Borde azul */
-  padding: 5px 10px; /* Acolchado interno */
-  border-radius: 10px; /* Esquinas redondeadas */
+  border: 2px solid #0077cc;
+  padding: 5px 10px;
+  border-radius: 10px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: 20px;
-  cursor: pointer; /* Indicador de cursor en mano */
-  text-decoration: none; /* Quitar subrayado del texto */
-  display: inline-block; /* Permitir que el botón se ajuste al contenido */
-  margin: 10px 0; /* Margen superior e inferior */
-  transition: background-color 0.3s ease; /* Animación de cambio de color de fondo al pasar el cursor */
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
 }
-.closeButton:hover {
-  background-color: #d6efff; /* Color de fondo azul más claro al pasar el cursor */
+
+dialog.infoContainer .closeButton:hover {
+  background-color: #d6efff;
 }
 
 @media (max-width: 768px) {
