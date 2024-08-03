@@ -1,150 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokedex</title>
-    <link rel="stylesheet" href="css/estilo.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Playpen+Sans&family=Young+Serif&display=swap" rel="stylesheet">
-<link href='https://unpkg.com/css.gg@2.0.0/icons/css/search.css' rel='stylesheet'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/estilo.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Playpen+Sans&family=Young+Serif&display=swap" rel="stylesheet"/>
+    <link href="https://unpkg.com/css.gg@2.0.0/icons/css/search.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"crossorigin="anonymous"/>
+  </head>
 
-</head>
-<body>
+  <body>
     
-<header>
-    <div class="div-img" >
-   <img src="img/hero-img.png" alt="logo" class="img-log"> 
-</div>
-       <!--<div class="titulo">
-    <h1><span class="poke-izquierda">Poke</span><samp class="poke-derecha">dex</samp></h1> 
-</div> --> 
+    <header>
+      <div class="divImg">
+        <img src="img/hero-img.png" alt="logo" class="imgLog" />
+      </div>
+      <!--<div class="titulo">
+    <h1><span class="pokeLeft">Poke</span><samp class="pokeRight">dex</samp></h1> 
+</div> -->
 
-    <!--buscador-->
-    <div class="buscador">
-        <label for="buscar" class="buscador-titulo">Nombre o Numero</label>
-        <input type="search" id="buscar" >
-        <button  class="lupita" id="lupa">
-            <i class="fas fa-search"></i>
+<!--buscador-->
+    <div class="searchBar">
+        <label for="searchInput" class="searchTitle">Nombre o Numero</label>
+        <input type="search" id="searchInput" />
+        <button class="searchButton" id="searchButton">
+        <i class="fas fa-search"></i>
         </button>
-        <div class="parrafo">
-        <p class="buscador-text">Sumergete en la busqueda
-            de tu pokemon favorito por sus hablidades, 
-            tipos y toda la informacion que necesites.</p>
+        <div class="paragraph">
+        <p class="searchText">
+            Sumergete en la busqueda de tu pokemon favorito por sus hablidades,
+            tipos y toda la informacion que necesites.
+        </p>
         </div>
-    </div> 
-</header>
+    </div>
+    </header>
 
-
-<main>        
-<!--seccion de categorias-->
-    <div class="section-categoria">
-
-        <div class="butom-random">
-            <button id="btn-random">Pokemon Random</button>
-        </div>
-
-
-        <div class="categoria">
-            <label for="buscadorA-Z">Buscar por:</label>
-            <select name="selection" id="buscadorA-Z">
-                <option value="id-asc">Numero inferior</option>
-                <option value="id-desc">Numero superior</option>
-                <option value="name-asc">a-z</option>
-                <option value="name-desc">z-a</option>
-            </select>
-        </div>
-
+<main>
+    <!--seccion de categorias-->
+    <div class="sectionCategory">
+    <div class="randomButton">
+        <button id="randomButton">Pokemon Random</button>
     </div>
 
-    <p class="texto">Filtros por tipos:</p>
-    <div class="filtro_contenedor activo">
+        <div class="category">
+        <label for="searchA-Z">Buscar por:</label>
+        <select name="selection" id="searchA-Z">
+            <option value="id-asc">Numero inferior</option>
+            <option value="id-desc">Numero superior</option>
+            <option value="name-asc">a-z</option>
+            <option value="name-desc">z-a</option>
+        </select>
+        </div>
+      </div>
+
+      <p class="text">Filtros por tipos:</p>
+      <div id="filterContainer" class="filterContainer active">
         <ul>
-            <li class="filtro_tipo "><button class="fitro-btn" onclick="filterPoke('all')" id="VER TODOS">Ver todos</button> </li>
-            <li class="filtro_tipo "><button class="fitro-btn normal"onclick="filterPoke('normal')" id="normal">Normal</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn bug" onclick="filterPoke('bug')" id="bicho">Bicho</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn fairy" onclick="filterPoke('fairy')" id="hada">Hada</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn dragon" onclick="filterPoke('dragon')" id="dragon">Dragon</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn fire" onclick="filterPoke('fire')" id="fuego">Fuego</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn ghost" onclick="filterPoke('ghost')" id="fantasma">Fantasma</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn ground"  onclick="filterPoke('ground')"id="tierra">Tierra</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn psychic" onclick="filterPoke('psychic')" id="psiquico">Psiquico</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn steel" onclick="filterPoke('steel')" id="acero">Acero</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn dark" onclick="filterPoke('dark')" id="siniestro">Siniestro</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn electric" onclick="filterPoke('electric')" id="electrico">Electrico</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn lucha" onclick="filterPoke('fighting')" id="lucha">Lucha</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn flying" onclick="filterPoke('flying')" id="volador">Volador</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn grass" onclick="filterPoke('grass')" id="planta">Planta</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn ice" onclick="filterPoke('ice')" id="hielo">Hielo</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn poison" onclick="filterPoke('poison')" id="veneno">Veneno</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn rock" onclick="filterPoke('rock')" id="roca">Roca</button></li>
-            <li class="filtro_tipo"><button class="fitro-btn water" onclick="filterPoke('water')" id="agua">Agua</button></li>
+          <li class="filterType"><button class="filterButton" id="all">Ver todos</button></li>
+          <li class="filterType"><button class="filterButton normal" id="normal">Normal</button></li>
+          <li class="filterType"><button class="filterButton bug" id="bug">Bicho</button></li>
+          <li class="filterType"><button class="filterButton fairy" id="fairy">Hada</button></li>
+          <li class="filterType"><button class="filterButton dragon" id="dragon">Dragon</button></li>
+          <li class="filterType"><button class="filterButton fire" id="fire">Fuego</button></li>
+          <li class="filterType"><button class="filterButton ghost" id="ghost">Fantasma</button></li>
+          <li class="filterType"><button class="filterButton ground" id="ground">Tierra</button></li>
+          <li class="filterType"><button class="filterButton psychic" id="psychic">Psiquico</button></li>
+          <li class="filterType"><button class="filterButton steel" id="steel">Acero</button></li>
+          <li class="filterType"><button class="filterButton dark" id="dark">Siniestro</button></li>
+          <li class="filterType"><button class="filterButton electric" id="electric">Electrico</button></li>
+          <li class="filterType"><button class="filterButton fighting" id="fighting">Lucha</button></li>
+          <li class="filterType"><button class="filterButton flying" id="flying">Volador</button></li>
+          <li class="filterType"><button class="filterButton grass" id="grass">Planta</button></li>
+          <li class="filterType"><button class="filterButton ice" id="ice">Hielo</button></li>
+          <li class="filterType"><button class="filterButton poison" id="poison">Veneno</button></li>
+          <li class="filterType"><button class="filterButton rock" id="rock">Roca</button></li>
+          <li class="filterType"><button class="filterButton water" id="water">Agua</button></li>
         </ul>
-    </div>
+      </div>
 
-    
-<!--[caja pokemon]-->
-        <div class="pokemon-list">
-
-            <div class="pokemom-box activo" onclick="mostrar();">
-                <p class="pokemon-id-back">#001</p>
-                    <div class="img-poke">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-                            alt="img del pokemon">
-                    </div>
-                    <div class="poke-info">
-                        <div class="idPokemon">#001</div>
-                        <div class="name-poke">Bulbasaur</div>
-                        <div class="experencia">Exp: 64</div>
-                        <div class="poke-tipos">
-                            <div class=" grass tipo">Planta</div>
-                        <div class=" ground tipo">Planta</div>
-                        </div>
-                        
-                    </div>
+      <!--[caja pokemon]-->
+      <div class="pokemonList" id="pokemonList">
+        <div class="pokemonBox active" id="pokemonBoxTemplate">
+          <p class="pokemonIdBack" data-pokemon-id-back>#001</p>
+          <div class="imgPoke">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+              alt="img del pokemon"
+              data-pokemon-image
+            />
+          </div>
+          <div class="pokeInfo">
+            <div class="idPokemon" data-pokemon-id>#001</div>
+            <div class="namePoke" data-pokemon-name>Bulbasaur</div>
+            <div class="experience" data-pokemon-exp>Exp: 64</div>
+            <div class="pokeTypes" data-pokemon-types>
+              <div class="grass type" data-pokemon-type>Planta</div>
+              <div class="ground type" data-pokemon-type>Planta</div>
             </div>
+          </div>
         </div>
-        
-<div class="info-contenedor">
-    <div class="img">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-        alt="img del pokemon">
-    </div>
+      </div>
 
-    <div class="info-detalles">
-        <p class="datos-poke">Tras nacer, crece alimentándose
-                durante un tiempo de los nutrientes que contiene
-                el bulbo de su lomo.
-            </p>
-
-            <div class="cuadro-datos">
-                <div class="altura">Altura: 0,7 m</div>
-                <div class="peso">Peso: 6,5 kg</div>
-                <div class="sexo">Sexo:</div>
-                <div class="categoria">Categoria: semilla</div>
-                <div class="hability">Habilidad: Espesura</div>
-            </div>
+      <dialog class="infoContainer" id="infoContainer">
+        <div class="img">
+          <img
+            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+            alt="img del pokemon"
+            data-info-image
+          />
         </div>
 
-    <div class="debilidad-poke">
-        <h3 class="titulo-info">Debilidades:</h3>
-        <div class="debilidad fire tipo">fuego </div>
-        <div class="debilidad ice tipo">Hielo</div>
-        <div class="debilidad flying tipo"> Volador</div>
-        <div class="debilidad psychic tipo">Psiquico</div>
-    </div>
-        <button class="btn-cerrar" onclick="ocultar()">Cerrar</button>
-</div>
-
-<!--[btn Ver mas]-->
-        <div class="bot-verMas">
-            <button class="btn-mas">Ver mas</button>
+        <div class="infoDetails">
+          <p class="pokeData" data-info-name></p>
+          <p class="pokeData" data-info-types></p>
+          <div class="dataBox">
+            <div class="height">Altura: 0,7 m</div>
+            <div class="weight">Peso: 6,5 kg</div>
+            <div class="sex">Sexo:</div>
+            <div class="category">Categoria: semilla</div>
+            <div class="ability">Habilidad: Espesura</div>
+          </div>
         </div>
+
+        <div class="weaknessPoke">
+          <h3 class="infoTitle">Debilidades:</h3>
+          <div class="weakness fire type">fuego</div>
+          <div class="weakness ice type">Hielo</div>
+          <div class="weakness flying type">Volador</div>
+          <div class="weakness psychic type">Psiquico</div>
+        </div>
+        <button class="closeButton" id="closeButton">Cerrar</button>
+      </dialog>
+
+      <!--[btn Ver mas]-->
+      <div class="loadMoreContainer">
+        <button class="loadMoreButton" id="loadMoreButton">Ver mas</button>
+      </div>
+
 </main>
 
-
-    <script src="js/app.js"></script>
-</body>
+    <script type="module" src="js/app.js"></script>
+  </body>
 </html>
