@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="css/estilo.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Playpen+Sans&family=Young+Serif&display=swap" rel="stylesheet"/>
-    <link href="https://unpkg.com/css.gg@2.0.0/icons/css/search.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Playpen+Sans&family=Young+Serif&display=swap" />
+    <link rel="stylesheet" href="https://unpkg.com/css.gg@2.0.0/icons/css/search.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"crossorigin="anonymous"/>
   </head>
 
@@ -26,15 +26,15 @@
     <div class="searchBar">
         <label for="searchInput" class="searchTitle">Nombre o Numero</label>
         <input type="search" id="searchInput" />
-        <button class="searchButton" id="searchButton">
-        <i class="fas fa-search"></i>
-        </button>
+        <button class="searchButton" id="searchButton"><i class="fas fa-search"></i></button>
+
         <div class="paragraph">
         <p class="searchText">
             Sumergete en la busqueda de tu pokemon favorito por sus hablidades,
             tipos y toda la informacion que necesites.
         </p>
         </div>
+
     </div>
     </header>
 
@@ -97,8 +97,8 @@
             <div class="namePoke" data-pokemon-name>Bulbasaur</div>
             <div class="experience" data-pokemon-exp>Exp: 64</div>
             <div class="pokeTypes" data-pokemon-types>
-              <div class="grass type" data-pokemon-type>Planta</div>
-              <div class="ground type" data-pokemon-type>Planta</div>
+              <div class="filterButton grass type" data-pokemon-type>Planta</div>
+              <div class="filterButton poison type" data-pokemon-type>Planta</div>
             </div>
           </div>
         </div>
@@ -119,7 +119,6 @@
           <div class="dataBox">
             <div class="height">Altura: 0,7 m</div>
             <div class="weight">Peso: 6,5 kg</div>
-            <div class="sex">Sexo:</div>
             <div class="category">Categoria: semilla</div>
             <div class="ability">Habilidad: Espesura</div>
           </div>
